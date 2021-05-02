@@ -5,7 +5,6 @@ import { Navbar } from "./components/layout/Navbar";
 import { Landing } from "./components/layout/Landing";
 import { Register } from "./components/auth/Register";
 import { Login } from "./components/auth/Login";
-import Alert from "./components/layout/Alert";
 // redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -15,17 +14,14 @@ const App = () => (
     <Router>
       <Fragment>
         <Navbar />
-        <Route exact path="/">
+        <Route exact path="/" component={Landing}>
           <Landing />
         </Route>
         <section className="container">
-          <Alert/>
           <Switch>
-            <Route exact path="/register">
-              <Register />
+            <Route exact path="/register" component={Register}>
             </Route>
-            <Route exact path="/login">
-              <Login />
+            <Route exact path="/login" component={Login}>
             </Route>
           </Switch>
         </section>

@@ -15,42 +15,24 @@ import {
     loading: true,
     user: null
   };
-  
-export function authReducer(state = initialState, action) {
+export default function (state = initialState, action) {
     const { type, payload } = action;
   
     switch (type) {
-      case USER_LOADED:
-        return {
-          ...state,
-          isAuthenticated: true,
-          loading: false,
-          user: payload
-        };
       case REGISTER_SUCCESS:
-      case LOGIN_SUCCESS:
         return {
           ...state,
           ...payload,
           isAuthenticated: true,
           loading: false
         };
-      case ACCOUNT_DELETED:
+      case REGISTER_FAIL:
+        localStorage.removeItem('token')
         return {
           ...state,
           token: null,
           isAuthenticated: false,
           loading: false,
-          user: null
-        };
-      case AUTH_ERROR:
-      case LOGOUT:
-        return {
-          ...state,
-          token: null,
-          isAuthenticated: false,
-          loading: false,
-          user: null
         };
       default:
         return state;
